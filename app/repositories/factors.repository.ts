@@ -1,9 +1,12 @@
-import { PrismaClient } from '@prisma/client';
+import { Factors, PrismaClient } from '@prisma/client';
 
+const TABLE_NAME = 'factors' as const;
 export class FactorsRepository {
-	private table: PrismaClient['factors'];
-	constructor(table: PrismaClient['factors']) {
-		this.table = table;
+	private client: PrismaClient;
+	private table: PrismaClient[typeof TABLE_NAME];
+	constructor(client: PrismaClient) {
+		this.client = client;
+		this.table = client.factors;
 	}
 
 	public async list() {
@@ -15,5 +18,11 @@ export class FactorsRepository {
 
 	public async create(data: { name: string }) {
 		return this.table.create({ data });
+	}
+
+	public async radomList(take: number) {
+		return this.client.$queryRaw<
+			Factors[]
+		>`SELECT * FROM Factors ORDER BY RANDOM() LIMIT ${take}`;
 	}
 }

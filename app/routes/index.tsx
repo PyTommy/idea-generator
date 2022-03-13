@@ -1,32 +1,24 @@
+import { Factors } from '@prisma/client';
+import { json, LoaderFunction, useLoaderData } from 'remix';
+import { ScreenContainer } from '~/components/ScreenContainer/ScreenContainer';
+import { factorsRepository } from '~/repositories';
+
+type LoaderData = { factors: Factors[] };
+export const loader: LoaderFunction = async () => {
+	const factors = await factorsRepository.radomList(3);
+	const data: LoaderData = { factors };
+	return json(data);
+};
+
 export default function Index() {
-  return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
+	const { factors } = useLoaderData<LoaderData>();
+	return (
+		<ScreenContainer>
+			<ul>
+				{factors.map((factor) => (
+					<li key={factor.id}>{factor.name}</li>
+				))}
+			</ul>
+		</ScreenContainer>
+	);
 }
