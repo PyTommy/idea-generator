@@ -1,6 +1,7 @@
 import { MenuLink } from './MenuLink';
 
 const menus: { to: string; title: string }[] = [
+	{ to: '/', title: 'Home' },
 	{
 		to: '/factors',
 		title: 'Factors',
