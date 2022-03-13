@@ -32,10 +32,10 @@ export default function App() {
 			<body
 				className={`flex w-screen h-screen ${Color.Background[800]} ${Color.Text.white} divide-x ${Color.Divider}`}
 			>
-				<nav className={`w-64`}>
+				<nav className={`w-64 overflow-y-auto`}>
 					<MenuBar />
 				</nav>
-				<main>
+				<main className="w-full h-full overflow-hidden">
 					<Outlet />
 				</main>
 				<ScrollRestoration />

@@ -12,4 +12,8 @@ export class FactorsRepository {
 			orderBy: { createdAt: 'desc' },
 		});
 	}
+
+	public async create(data: { name: string }) {
+		return this.table.create({ data });
+	}
 }

@@ -9,7 +9,7 @@ const menus: { to: string; title: string }[] = [
 
 export function MenuBar() {
 	return (
-		<aside className="w-full h-full overflow-y-auto py-4 px-3">
+		<aside className="w-full h-full py-4 px-3">
 			<ul className="space-y-2">
 				<li>
 					{menus.map(({ to, title }) => (
