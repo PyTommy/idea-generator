@@ -1,6 +1,6 @@
 import { ActionFunction, Form, json, redirect, useActionData } from 'remix';
 import { factorsRepository } from '~/repositories';
-import { Factor, TypeFactor } from '~/schema/factor';
+import { CreateFactorScheme, CreateFactorSchemeType } from '~/schema/factor';
 import { FormActionData } from '~/types';
 
 const badRequest = (data: AddFactorFormActionData) =>
@@ -15,7 +15,7 @@ export const addFormAction: ActionFunction = async ({ request }) => {
 		});
 	}
 
-	const parseResult = Factor.safeParse({ name });
+	const parseResult = CreateFactorScheme.safeParse({ name });
 
 	if (!parseResult.success) {
 		return badRequest({
@@ -28,7 +28,7 @@ export const addFormAction: ActionFunction = async ({ request }) => {
 	return null;
 };
 
-export type AddFactorFormActionData = FormActionData<TypeFactor>;
+export type AddFactorFormActionData = FormActionData<CreateFactorSchemeType>;
 export function AddFactorForm() {
 	const actionData = useActionData<AddFactorFormActionData>();
 	return (
