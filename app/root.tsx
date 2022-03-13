@@ -1,32 +1,46 @@
 import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "remix";
-import type { MetaFunction } from "remix";
+	Links,
+	LiveReload,
+	Meta,
+	Outlet,
+	Scripts,
+	ScrollRestoration,
+} from 'remix';
+import type { MetaFunction } from 'remix';
+
+import styles from './tailwind.css';
+import { MenuBar } from './components/MenuBar/MenuBar';
+import { Color } from './constants/styles';
+
+export function links() {
+	return [{ rel: 'stylesheet', href: styles }];
+}
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+	return { title: 'Idea Generator' };
 };
 
 export default function App() {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<head>
+				<meta charSet="utf-8" />
+				<meta name="viewport" content="width=device-width,initial-scale=1" />
+				<Meta />
+				<Links />
+			</head>
+			<body
+				className={`flex w-screen h-screen ${Color.Background[800]} ${Color.Text.white} divide-x ${Color.Divider}`}
+			>
+				<nav className={`w-64`}>
+					<MenuBar />
+				</nav>
+				<main>
+					<Outlet />
+				</main>
+				<ScrollRestoration />
+				<LiveReload />
+			</body>
+		</html>
+	);
 }

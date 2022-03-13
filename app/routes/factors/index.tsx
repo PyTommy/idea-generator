@@ -1,5 +1,6 @@
 import { Factors } from '@prisma/client';
 import { LoaderFunction, json, useLoaderData } from 'remix';
+import { ScreenContainer } from '~/components/ScreenContainer/ScreenContainer';
 import { factorsRepository } from '~/repositories';
 
 type LoaderData = { factors: Factors[] };
@@ -12,12 +13,14 @@ export const loader: LoaderFunction = async () => {
 export default function FactorsTableRoute() {
 	const data = useLoaderData<LoaderData>();
 	return (
-		<div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
+		<ScreenContainer>
 			<ul>
 				{data.factors.map((factor) => (
-					<li key={factor.id}>{factor.name}</li>
+					<li key={factor.id} className="font-bold">
+						{factor.name}
+					</li>
 				))}
 			</ul>
-		</div>
+		</ScreenContainer>
 	);
 }
